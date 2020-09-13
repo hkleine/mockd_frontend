@@ -1,6 +1,0 @@
-{
-  "domain": "dev-zi6me33d.eu.auth0.com",
-  "clientId": "LXjYw5frmWXRDCKziPF8R5167d9PXeHK",
-  "audience": "https://dev-zi6me33d.eu.auth0.com/api/v2/",
-  "redirect_uri": "http://localhost:3000/dashboard"
-}
