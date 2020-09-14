@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import LogoutButton from "./logout-button";
 import OutsideAlerter from "./outside-alerter";
 
+
+
 const Header = ({user}) => {
+    const menu = useRef();
     const [isOpen, setIsOpen] = React.useState(false);
     const toggleMenu = React.useCallback(() => setIsOpen(!isOpen))
+
+    useEffect(() => {
+        if (isOpen) {
+          document.addEventListener("mousedown", handleClick);
+        } else {
+          document.removeEventListener("mousedown", handleClick);
+        }
+    
+        return () => {
+          document.removeEventListener("mousedown", handleClick);
+        };
+      }, [isOpen]);
+
+    const handleClick = e => {
+        if (menu.current && menu.current.contains(e.target)) {
+            return;
+        }
+        // outside click 
+        toggleMenu();
+    };
+
     return (
         <header class="flex w-full h-24 justify-between items-center py-4 px-6 bg-white border-b-2 border-grey-600">
         <div class="flex items-center">
@@ -28,19 +52,17 @@ const Header = ({user}) => {
         <span class="relative mr-8">
             {user.name}
         </span>
-            <div class="relative">
+            <div class="relative" ref={menu}>
                 <button class="relative z-10 block h-8 w-8 rounded-full overflow-hidden shadow focus:outline-none" onClick={toggleMenu}>
                     <img class="h-full w-full object-cover" src={user.picture} alt="Your avatar" />
                 </button>
                 {isOpen && (
-                <OutsideAlerter>
-                    <div class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Profile</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Products</a>
-                        <LogoutButton />
-                    </div>
-                </OutsideAlerter>
-                )}
+                <div class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Profile</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Products</a>
+                    <LogoutButton />
+                </div>
+            )}
             </div>
         </div>
     </header>
