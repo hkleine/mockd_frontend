@@ -20,3 +20,18 @@ code {
 .dashboard-content-background {
   background: #55566c;
 }
+
+.active-link {
+  border-color: #f7fafc;
+  background-color: rgba(113, 128, 150);
+}
+
+.link {
+  display: flex;
+  margin-top: 1rem;
+  border-left-width: 4px;
+  padding: 1rem;
+  background-color: #2d3748;
+  --bg-opacity: 0.25;
+  border-color: #2d3748;
+}

@@ -14,7 +14,12 @@ function Dashboard() {
   return (
     <div>
       <DashboardLayout>
-        <h3>Moin</h3>
+        <div className="flex flex-col">
+          <div className="flex flex-row justify-between">
+            <h1 className="">Dashboard</h1>
+            <span>Moin</span>
+          </div>
+        </div>
       </DashboardLayout>
     </div>
   );

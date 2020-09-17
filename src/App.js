@@ -12,8 +12,10 @@ const App = () => {
   return (
     <div id="app" className="d-flex flex-column h-100">
       <Switch>
-        <Route path="/" exact component={Landing} />
-        <PrivateRoute path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/" exact component={Dashboard} />
+        {/* <PrivateRoute path="/alerts" component={} />
+        <PrivateRoute path="/add" component={} /> */}
+
       </Switch>
     </div>
   );
