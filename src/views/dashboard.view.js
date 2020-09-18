@@ -4,7 +4,7 @@ import {DashboardLayout} from "../layouts"
 function Dashboard() {
   useEffect(() => {
     // GET request using fetch inside useEffect React hook
-    fetch(`${process.env.REACT_APP_API}/device/5f5fb02bde3037095caa1fdf`)
+    fetch(`${process.env.REACT_APP_API}/api/device/5f5fb02bde3037095caa1fdf`)
         .then(response => {
           console.log(response);
         })

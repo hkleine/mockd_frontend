@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { Loading, PrivateRoute } from "./components";
-import { Landing, Dashboard } from "./views";
+import { AlertView, Dashboard, StatisticView, ProfileView } from "./views";
 
 import "./App.css";
 
@@ -13,6 +13,10 @@ const App = () => {
     <div id="app" className="d-flex flex-column h-100">
       <Switch>
         <PrivateRoute path="/" exact component={Dashboard} />
+        <PrivateRoute path="/alerts" exact component={AlertView} />
+        <PrivateRoute path="/statistics" exact component={StatisticView} />
+        <PrivateRoute path="/profile" exact component={ProfileView} />
+
         {/* <PrivateRoute path="/alerts" component={} />
         <PrivateRoute path="/add" component={} /> */}
 

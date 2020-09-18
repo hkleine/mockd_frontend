@@ -1,4 +1,7 @@
 import Dashboard from "./dashboard.view";
-import Landing from "./landing.view";
+import AlertView from "./alert.view";
+import StatisticView from "./statistic.view";
+import ProfileView from "./profile.view";
 
-export { Dashboard, Landing };
+
+export { Dashboard, AlertView, StatisticView, ProfileView };
