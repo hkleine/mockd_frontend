@@ -1,12 +1,13 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
-import { Loading } from "./loading";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+
 
 const PrivateRoute = ({ component, ...args }) => (
   <Route
     component={withAuthenticationRequired(component, {
-      onRedirecting: () => <p>loading</p>,
+      onRedirecting: () => <ClimbingBoxLoader color={"#5D40B8"} loading={true} />,
     })}
     {...args}
   />

@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { Loading, PrivateRoute } from "./components";
+import { PrivateRoute } from "./components";
 import { AlertView, Dashboard, StatisticView, ProfileView } from "./views";
 
 import "./App.css";

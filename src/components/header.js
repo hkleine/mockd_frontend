@@ -32,7 +32,7 @@ const Header = ({user}) => {
 
     return (
         <header className="flex w-full justify-end items-center py-4 px-20 bg-gray-100 bg-opacity-75">
-            <img className="relative w-16 h-16 rounded-full" src={user.picture} alt="Your avatar" />
+            <img className="relative w-16 h-16 rounded-full shadow-md" src={user.picture} alt="Your avatar" />
             <span className="relative ml-6">
             {user.name}
         </span>

@@ -1,12 +1,21 @@
-import userEvent from "@testing-library/user-event";
 import React from "react";
 import { HiOutlineCode, HiOutlineTrash } from 'react-icons/hi';
 import { IconContext } from 'react-icons';
+import axios from 'axios';
 import Toggle from 'react-toggle';
-import "react-toggle/style.css"
+import "react-toggle/style.css";
 
-const SensorCard = ({sensor}) => {
-    console.log(sensor);
+function SensorCard({sensorIn}) {
+    const [sensor, setSensor] = React.useState(sensorIn);
+
+    function toggleSensor() {
+        axios({ method: 'get', url: `${process.env.REACT_APP_API}/api/device/${sensor._id}/toggle` })
+        .then(response => {
+          console.log(response.data);
+          setSensor(response.data);
+        });
+    }
+
   return (
     <div className="max-w-sm rounded-lg overflow-hidden shadow-sm bg-white p-4">
         <div className="flex flex-col">
@@ -55,8 +64,9 @@ const SensorCard = ({sensor}) => {
                     </div>
                     <label>
                         <Toggle
+                            checked={sensor.is_running}
+                            onChange={toggleSensor}
                             className="toggle"
-                            defaultChecked={sensor.isRunning}
                             icons={false} />
                     </label>
                 </div>

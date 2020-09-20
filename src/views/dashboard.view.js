@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {DashboardLayout} from "../layouts";
-import { HiPlus } from 'react-icons/hi';
-import { IconContext } from 'react-icons';
 import { AddDeviceStepperForm } from '../components/AddDeviceStepperForm';
 import { SensorGrid } from '../components';
 import Modal from 'react-modal';
 import axios from 'axios';
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { useAuth0 } from "@auth0/auth0-react";
 
 
@@ -44,7 +43,21 @@ function Dashboard() {
   }
 
   if (isLoading) {
-    return <div className="App">Loading...</div>;
+    return (
+      <div>
+        <DashboardLayout>
+          <div className="flex flex-col">
+            <div className="flex flex-row justify-between">
+              <h1 className="text-gray-700 text-2xl font-medium">Dashboard</h1>
+              <ClimbingBoxLoader 
+                color={"#5D40B8"}
+                loading={isLoading}
+              />
+            </div>
+          </div>
+        </DashboardLayout>
+      </div>
+    );
   }
 
   return (
