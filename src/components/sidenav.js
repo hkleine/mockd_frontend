@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { HiOutlineViewGrid, HiOutlineBell, HiOutlineChartBar, HiOutlineUser, HiOutlineLogout } from 'react-icons/hi'
+import { HiOutlineViewGrid, HiOutlineBell, HiOutlineChartBar, HiOutlineUser } from 'react-icons/hi';
 import { IconContext } from 'react-icons';
 import LogoutButton from './logout-button';
 
