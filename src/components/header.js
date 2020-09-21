@@ -4,7 +4,7 @@ import Searchbar from "./Searchbar"
 
 const Header = ({user}) => {
     return (
-      <header className="flex w-full justify-between items-center py-4 pr-20 bg-gray-200 bg-opacity-75">
+      <header className="flex w-full justify-between items-center py-8 pr-20 pl-12 bg-gray-200 bg-opacity-75">
         <Searchbar />
         <div className="flex items-center">
           <img className="relative w-16 h-16 rounded-full shadow-md" src={user.picture} alt="Your avatar" />

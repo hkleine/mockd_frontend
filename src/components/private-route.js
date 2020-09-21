@@ -7,7 +7,7 @@ import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 const PrivateRoute = ({ component, ...args }) => (
   <Route
     component={withAuthenticationRequired(component, {
-      onRedirecting: () => <ClimbingBoxLoader color={"#5D40B8"} loading={true} />,
+      // onRedirecting: () => <ClimbingBoxLoader color={"#5D40B8"} loading={true} />,
     })}
     {...args}
   />

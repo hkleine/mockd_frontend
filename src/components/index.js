@@ -9,7 +9,21 @@ import DashboardContent from "./dashboard-content";
 import OutsideAlerter from "./outside-alerter";
 import SensorGrid from "./SensorGrid";
 import SensorCard from "./SensorCard";
-import Searchbar from "./Searchbar"
+import Searchbar from "./Searchbar";
+import AddDeviceButton from './AddDeviceButton';
 
 
-export { PrivateRoute, Loading, LoginButton, LogoutButton, Auth0ProviderWithHistory, SideNav, Header, DashboardContent, OutsideAlerter, SensorGrid, SensorCard, Searchbar };
+export { 
+    PrivateRoute, 
+    Loading, 
+    LoginButton, 
+    LogoutButton, 
+    Auth0ProviderWithHistory,
+    SideNav, 
+    Header, 
+    DashboardContent, 
+    OutsideAlerter, 
+    SensorGrid, 
+    SensorCard, 
+    Searchbar, 
+    AddDeviceButton };

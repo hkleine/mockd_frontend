@@ -2,7 +2,7 @@ import React from "react";
 import { Switch } from "react-router-dom";
 
 import { PrivateRoute } from "./components";
-import { AlertView, Dashboard, StatisticView, ProfileView } from "./views";
+import { AlertView, Dashboard, StatisticView, ProfileView, EditView } from "./views";
 
 import "./App.css";
 
@@ -14,7 +14,7 @@ const App = () => {
         <PrivateRoute path="/" exact component={Dashboard} />
         <PrivateRoute path="/alerts" exact component={AlertView} />
         <PrivateRoute path="/statistics" exact component={StatisticView} />
-        <PrivateRoute path="/profile" exact component={ProfileView} />
+        <PrivateRoute path="/edit/:id" exact component={EditView} />
       </Switch>
     </div>
   );

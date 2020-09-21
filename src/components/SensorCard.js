@@ -1,4 +1,6 @@
 import React from "react";
+import { NavLink } from 'react-router-dom';
+
 import { HiOutlineCode, HiOutlineTrash } from 'react-icons/hi';
 import { IconContext } from 'react-icons';
 import axios from 'axios';
@@ -7,6 +9,7 @@ import "react-toggle/style.css";
 
 function SensorCard({sensorIn}) {
     const [sensor, setSensor] = React.useState(sensorIn);
+    const editUrl = `/edit/${sensorIn._id}`
 
     function toggleSensor() {
         axios({ method: 'get', url: `${process.env.REACT_APP_API}/api/device/${sensor._id}/toggle` })
@@ -19,23 +22,23 @@ function SensorCard({sensorIn}) {
   return (
     <div className="max-w-sm rounded-lg overflow-hidden shadow-sm bg-white p-4">
         <div className="flex flex-col">
-            <div className="flex flex-row. justify-between">
+            <div className="flex flex-row justify-between">
                 <h3 className="text-gray-700 text-lg">{sensor.name}</h3>
                 <div className="flex flex-row">
-                    <button className="outline-none pr-2">
+                    <NavLink className="outline-none pr-2" to={editUrl}>
                         <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
-                            <div className="text-gray-600">
+                            <div className="text-gray-600 hover:text-purple-700">
                                 <HiOutlineCode />
                             </div>
                         </IconContext.Provider>
-                    </button>
-                    <button className="outline-none">
+                    </NavLink>
+                    <NavLink className="outline-none" to="">
                         <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
-                            <div className="text-gray-600">
+                            <div className="text-gray-600 hover:text-purple-700">
                                 <HiOutlineTrash />
                             </div>
                         </IconContext.Provider>
-                    </button>
+                    </NavLink>
                 </div>
             </div>
             {sensor.protocol === 'http' &&
