@@ -14,7 +14,7 @@ const AddDeviceButton = () => {
           <HiOutlinePlus />
         </div>
       </IconContext.Provider>
-      <span className="m-auto">Add New Device</span>
+      <span className="m-auto">New Device</span>
     </NavLink>
   );
 };

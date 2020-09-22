@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from 'react-router-dom';
 
 import { HiOutlineCode, HiOutlineTrash } from 'react-icons/hi';
@@ -6,16 +6,31 @@ import { IconContext } from 'react-icons';
 import axios from 'axios';
 import Toggle from 'react-toggle';
 import "react-toggle/style.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
-function SensorCard({sensorIn}) {
-    const [sensor, setSensor] = React.useState(sensorIn);
-    const editUrl = `/edit/${sensorIn._id}`
 
-    function toggleSensor() {
-        axios({ method: 'get', url: `${process.env.REACT_APP_API}/api/device/${sensor._id}/toggle` })
+function SensorCard({sensorIn, updateSensors}) {
+    const { getAccessTokenSilently } = useAuth0();
+    const [sensor, setSensor] = useState(sensorIn);
+    const editUrl = `/edit/${sensorIn._id}`;
+
+    async function toggleSensor() {
+        const accessToken = await getAccessTokenSilently({
+            audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+        });
+        axios({ method: 'get', url: `${process.env.REACT_APP_API}/api/device/${sensor._id}/toggle`, headers: {Authorization: `Bearer ${accessToken}`,} })
         .then(response => {
-          console.log(response.data);
           setSensor(response.data);
+        });
+    }
+
+    async function deleteSensor() {
+        const accessToken = await getAccessTokenSilently({
+            audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+        });
+        axios({ method: 'delete', url: `${process.env.REACT_APP_API}/api/device/${sensor._id}`, headers: {Authorization: `Bearer ${accessToken}`,} })
+        .then(() => {
+            updateSensors(sensor);
         });
     }
 
@@ -32,13 +47,13 @@ function SensorCard({sensorIn}) {
                             </div>
                         </IconContext.Provider>
                     </NavLink>
-                    <NavLink className="outline-none" to="">
+                    <button className="outline-none pb-2" onClick={deleteSensor}>
                         <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
                             <div className="text-gray-600 hover:text-purple-700">
                                 <HiOutlineTrash />
                             </div>
                         </IconContext.Provider>
-                    </NavLink>
+                    </button>
                 </div>
             </div>
             {sensor.protocol === 'http' &&

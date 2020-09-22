@@ -2,13 +2,21 @@ import React, { useState, useEffect } from "react";
 import {DashboardLayout} from "../layouts";
 import { SensorGrid, Loading } from '../components';
 import axios from 'axios';
-import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { useAuth0 } from "@auth0/auth0-react";
+import { remove } from 'lodash';
 
 function Dashboard() {
   const [isLoading, setLoading] = useState(true);
   const { user, getAccessTokenSilently } = useAuth0();
   const [sensors, setSensors] = useState();
+
+  function updateSensors(updatedSensor) {
+    setSensors([]);
+    remove(sensors, function (s) {
+      return s._id === updatedSensor._id;
+    });
+    setSensors(sensors)
+  }
 
 
   useEffect(() => {
@@ -17,7 +25,6 @@ function Dashboard() {
         const accessToken = await getAccessTokenSilently({
           audience: process.env.REACT_APP_AUTH0_AUDIENCE,
         });
-    
         const response = await axios({ method: 'get', url: `${process.env.REACT_APP_API}/api/user/${user.sub}/devices/`,
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -45,7 +52,7 @@ function Dashboard() {
           <div className="flex flex-row justify-between">
             <h1 className="text-gray-700 text-2xl font-medium">Dashboard</h1>
           </div>
-          <SensorGrid sensors={sensors} />
+          <SensorGrid sensors={sensors} updateSensors={updateSensors} />
         </div>
       </DashboardLayout>
     </div>
