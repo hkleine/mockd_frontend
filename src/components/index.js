@@ -1,5 +1,5 @@
-import PrivateRoute from './private-route';
-import Loading from './loading';
+import PrivateRoute from './PrivateRoute';
+import Loading from './Loading';
 import Auth0ProviderWithHistory from './auth0-provider-with-history';
 import LoginButton from './login-button';
 import LogoutButton from './logout-button';

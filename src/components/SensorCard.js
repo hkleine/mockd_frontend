@@ -25,7 +25,7 @@ function SensorCard({sensorIn}) {
             <div className="flex flex-row justify-between">
                 <h3 className="text-gray-700 text-lg">{sensor.name}</h3>
                 <div className="flex flex-row">
-                    <NavLink className="outline-none pr-2" to={editUrl}>
+                    <NavLink className="outline-none pr-2" to={editUrl} sensor={sensor} >
                         <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
                             <div className="text-gray-600 hover:text-purple-700">
                                 <HiOutlineCode />
@@ -45,8 +45,8 @@ function SensorCard({sensorIn}) {
                 <div>
                     <div className="flex flex-row justify-between py-4">
                         <span className="text-gray-600 text-sm">{sensor.http_host}:{sensor.http_port}{sensor.http_route}</span>
-                        <div class="flex justify-center items-center py-2 px-4 rounded-full text-white bg-primary shadow-md">
-                            <div class="text-xs font-normal leading-none max-w-full flex-initial">{sensor.protocol}</div>
+                        <div className="flex justify-center items-center py-2 px-4 rounded-full text-white bg-primary shadow-md">
+                            <div className="text-xs font-normal leading-none max-w-full flex-initial">{sensor.protocol}</div>
                         </div>
                     </div>
                     <label>
@@ -61,8 +61,8 @@ function SensorCard({sensorIn}) {
                 <div>
                     <div className="flex flex-row justify-between py-4">
                         <span className="text-gray-600 text-sm">{sensor.mqtt_topic}</span>
-                        <div class="flex justify-center items-center py-2 px-4 rounded-full text-white bg-indigo-500 shadow-md">
-                            <div class="text-xs font-normal leading-none max-w-full flex-initial">{sensor.protocol}</div>
+                        <div className="flex justify-center items-center py-2 px-4 rounded-full text-white bg-indigo-500 shadow-md">
+                            <div className="text-xs font-normal leading-none max-w-full flex-initial">{sensor.protocol}</div>
                         </div>
                     </div>
                     <label>
