@@ -4,14 +4,19 @@ import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import {Loading} from '../components';
 import { useForm } from "react-hook-form";
+import moment from 'moment';
 
 function EditView({ match }) {
   let params = match.params;
   const { getAccessTokenSilently } = useAuth0();
   const [isLoading, setLoading] = useState(true);
   const [sensor, setSensor] = useState();
-  const { handleSubmit, register, errors } = useForm();
+  const { handleSubmit, register, errors, setValue } = useForm();
   const onSubmit = data => console.log(data);
+
+  function intervalAsSeconds(interval) {
+    return moment.duration(interval).asSeconds();
+  }
 
   useEffect(() => {
     const getDevice = async () => {  
@@ -52,17 +57,23 @@ function EditView({ match }) {
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
             <div className="flex flex-col pb-12 max-w-lg">
               <label className="text-gray-600">Name</label>
-              <input className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" name="name" ref={register({ required: true })} />
+              <input className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" defaultValue={sensor.name} name="name" ref={register({ required: true })} />
               {errors.name?.type === 'required' && <span> This field is required</span>}
             </div>
 
             <div className="flex flex-col pb-12 max-w-lg">
               <label className="text-gray-600">Protocol</label>
-              <select className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" name="protocol" ref={register({ required: true })}>
+              <select className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" defaultValue={sensor.protocol} name="protocol" ref={register({ required: true })}>
                 <option value="http">HTTP</option>
                 <option value="mqtt">MQTT</option>
               </select>
               {errors.protocol?.type === 'required' && <span> This field is required</span>}
+            </div>
+
+            <div className="flex flex-col pb-12 max-w-lg">
+              <label className="text-gray-600">Interval</label>
+              <input className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" defaultValue={intervalAsSeconds(sensor.interval)} type="number" min="20" name="interval" ref={register({ required: true })} />
+              {errors.interval?.type === 'required' && <span> This field is required</span>}
             </div>
 
             <button type="submit">submit</button>
