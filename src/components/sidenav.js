@@ -3,10 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { HiOutlineViewGrid, HiOutlineBell, HiOutlineChartBar, HiOutlineUser } from 'react-icons/hi';
 import { IconContext } from 'react-icons';
 import LogoutButton from './logout-button';
+import Logo from './Logo'
 
 const SideNav = () => (
   <div className="fixed z-30 inset-y-0 left-0 h-screen transition duration-300 transform bg-white overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
-    <nav className="mt-48 pl-8 pr-24">
+    <Logo className="m-auto" />
+    <nav className="mt-24 pl-8 pr-24">
       <NavLink
         to="/"
         exact
