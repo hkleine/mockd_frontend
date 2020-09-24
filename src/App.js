@@ -8,7 +8,7 @@ import './App.css';
 
 const App = () => {
   return (
-    <div id="app" className="d-flex flex-column h-100">
+    <div id="app" className="d-flex flex-column h-100 h-screen bg-gray-200">
       <Switch>
         <PrivateRoute path="/" exact component={Dashboard} />
         <PrivateRoute path="/alerts" exact component={AlertView} />

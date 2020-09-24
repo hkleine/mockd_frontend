@@ -7,9 +7,9 @@ const DashboardLayout = ({children}) => {
   return (
     <div>
       {isAuthenticated && (
-        <div className="flex flex-row">
+        <div className="flex flex-row h-screen overflow-y-hidden overflow-x-hidden">
           <SideNav/>
-          <div className="flex flex-col w-full h-screen">
+          <div className="flex flex-col w-full h-screen overflow-y-auto overflow-x-hidden">
             <Header user={user}/>
             <DashboardContent> 
               {children}

@@ -6,7 +6,7 @@ import LogoutButton from './logout-button';
 import Logo from './Logo'
 
 const SideNav = () => (
-  <div className="fixed z-30 inset-y-0 left-0 h-screen transition duration-300 transform bg-white overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
+  <div className="fixed z-30 inset-y-0 left-0 h-screen transition duration-300 transform bg-white lg:translate-x-0 lg:static lg:inset-0">
     <Logo className="m-auto" />
     <nav className="mt-24 pl-8 pr-24">
       <NavLink
