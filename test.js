@@ -16,7 +16,7 @@ function parseTemplate(template) {
 }
 
 function replacer(match, p1, p2, p3, offset, string) {
-  console.log(match);
-  // p1 is nondigits, p2 digits, and p3 non-alphanumerics
-  return 'moin';
+  const numbers_re = /[-+]?[0-9]*\.?[0-9]+\gm;
+  console.log(match.match())
+  return "moin";
 }
