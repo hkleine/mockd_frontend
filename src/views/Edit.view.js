@@ -20,6 +20,40 @@ function EditView({ match }) {
     return moment.duration(interval).asSeconds();
   }
 
+  function ProtocolInputs({ sensor }) {
+    switch (sensor.protocol) {
+      case 'mqtt':
+        return (
+          <div>
+            <div className="flex flex-col pb-12 max-w-lg">
+              <label className="text-gray-600">MQTT Host</label>
+              <input className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" defaultValue={sensor.mqtt_host} type="text" name="mqtt_host" ref={register()} />
+            </div>
+            
+            <div className="flex flex-col pb-12 max-w-lg">
+              <label className="text-gray-600">MQTT Topic</label>
+              <input className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" defaultValue={sensor.mqtt_topic} type="text" name="mqtt_topic" ref={register()} />
+            </div>
+
+            <div className="flex flex-row pb-12 max-w-lg">
+              <div className="flex flex-col w-1/2">
+                <label className="text-gray-600">MQTT Username</label>
+                <input className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" defaultValue={sensor.mqtt_username} type="text" name="mqtt_username" ref={register()} />
+              </div>
+              <div className="flex flex-col w-1/2">
+                <label className="text-gray-600">MQTT Password</label>
+                <input className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" defaultValue={sensor.mqtt_password} type="text" name="mqtt_password" ref={register()} />
+              </div>
+            </div>
+          </div>
+        );
+      case 'http':
+        return <div>http</div>;
+      default:
+        return null;
+    }
+  }
+
   useEffect(() => {
     const getDevice = async () => {  
       try {
@@ -60,18 +94,38 @@ function EditView({ match }) {
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
             <div className="flex flex-col pb-12 max-w-lg">
               <label className="text-gray-600">Name</label>
-              <input className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" defaultValue={sensor.name} name="name" ref={register({ required: true })} />
+              <input 
+                className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" 
+                defaultValue={sensor.name} 
+                name="name" 
+                ref={register({ 
+                  required: true,
+                  minLength: 6,
+                  maxLength: 30,
+                })} 
+              />
               {errors.name?.type === 'required' && <span> This field is required</span>}
             </div>
 
             <div className="flex flex-col pb-12 max-w-lg">
               <label className="text-gray-600">Protocol</label>
-              <select className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" defaultValue={sensor.protocol} name="protocol" ref={register({ required: true })}>
+              <select 
+                className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" 
+                defaultValue={sensor.protocol} 
+                name="protocol" 
+                ref={register({ required: true })}
+                onChange={(e) => {
+                  sensor.protocol = e.currentTarget.value;
+                  setSensor({...sensor});
+                }}
+              >
                 <option value="http">HTTP</option>
                 <option value="mqtt">MQTT</option>
               </select>
               {errors.protocol?.type === 'required' && <span> This field is required</span>}
             </div>
+
+            <ProtocolInputs sensor={sensor} />
 
             <div className="flex flex-col pb-12 max-w-lg">
               <label className="text-gray-600">Interval</label>
@@ -87,7 +141,7 @@ function EditView({ match }) {
                   id          = 'a_unique_id'
                   theme='light_mitsuketa_tribute'
                   locale      = { locale }
-                  height      = '450px'
+                  height      = '350px'
                   colors={{
                     string: "#DAA520" // overrides theme colors with whatever color value you want
                   }}

@@ -67,6 +67,7 @@ function SensorCard({sensorIn, updateSensors}) {
                     <label>
                         <Toggle
                             className="toggle"
+                            onChange={toggleSensor}
                             defaultChecked={sensor.isRunning}
                             icons={false} />
                     </label>

@@ -8,7 +8,7 @@ import Logo from './Logo';
 const SideNav = () => (
   <div className="fixed z-30 inset-y-0 left-0 h-screen transition duration-300 transform bg-white lg:translate-x-0 lg:static lg:inset-0">
     <Logo className="m-auto" />
-    <nav className="mt-24 pl-8 pr-24">
+    <nav className="mt-24 px-12">
       <NavLink
         to="/"
         exact
