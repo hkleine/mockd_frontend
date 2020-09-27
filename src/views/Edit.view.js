@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import moment from 'moment';
 import 'jsoneditor-react/es/editor.min.css';
 import ReactJson from 'react-json-view';
+import JSONInput from 'react-json-editor-ajrm';
+import locale    from 'react-json-editor-ajrm/locale/en';
 
 function EditView({ match }) {
   let params = match.params;
@@ -141,8 +143,20 @@ function EditView({ match }) {
             <div className="flex flex-col pb-12 w-full">
               <label className="text-gray-600">JSON Data</label>
               <div className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none">
-              <ReactJson src={sensor.data} onEdit={(e) => setValue('data', e.updated_src)} />
-              
+              {/* <ReactJson src={sensor.data} onEdit={(e) => setValue('data', e.updated_src)} /> */}
+              <JSONInput
+                  id          = 'a_unique_id'
+                  placeholder = { sensor.data }
+                  locale      = { locale }
+                  height      = '350px'
+                  onChange = {(e) => setValue('data', e.jsObject)}
+                  theme = 'light_mitsuketa_tribute'
+                  colors = {{
+                    keys: '#4a5568',
+                    string: '#5D40B8',
+                    number: '#667eea'
+                  }}
+              />
               </div>
             </div>
 
