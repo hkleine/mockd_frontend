@@ -23,7 +23,7 @@ function SensorCard({sensorIn, updateSensors}) {
         });
         axios({ method: 'get', url: `${process.env.REACT_APP_API}/api/device/${sensor._id}/toggle`, headers: {Authorization: `Bearer ${accessToken}`,} })
         .then(response => {
-          setSensor(response.data);
+            setSensor(response.data);
         });
     }
 

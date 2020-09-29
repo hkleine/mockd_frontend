@@ -12,6 +12,7 @@ import Searchbar from './Searchbar';
 import AddDeviceButton from './AddDeviceButton';
 import ProtocolInputs from './ProtocolInputs';
 import DeleteDialog from './DeleteDialog';
+import SnackbarComponent from './SnackbarComponent';
 
 export {
   PrivateRoute,
@@ -27,5 +28,6 @@ export {
   Searchbar,
   AddDeviceButton,
   ProtocolInputs,
-  DeleteDialog
+  DeleteDialog,
+  SnackbarComponent
 };

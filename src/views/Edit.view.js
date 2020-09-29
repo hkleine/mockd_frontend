@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { DashboardLayout } from '../layouts';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
-import {Loading, ProtocolInputs} from '../components';
+import {Loading, ProtocolInputs, SnackbarComponent} from '../components';
 import { useForm } from "react-hook-form";
 import moment from 'moment';
 import 'jsoneditor-react/es/editor.min.css';
@@ -15,10 +15,12 @@ function EditView({ match }) {
   const { getAccessTokenSilently } = useAuth0();
   const [isLoading, setLoading] = useState(true);
   const [sensor, setSensor] = useState();
+  const [openSuccess, setOpenSuccess] = React.useState(false);
+  const [openError, setOpenError] = React.useState(false);
   const { handleSubmit, register, errors, setValue } = useForm();
 
   const onSubmit = async (data) => {
-    const res = await updateDevice(data);
+    await updateDevice(data);
   };
 
   const updateDevice = async (newSensor) => {  
@@ -40,7 +42,10 @@ function EditView({ match }) {
       setSensor(response.data);
       setValue('data', response.data.data)
       setLoading(false);
+      setOpenSuccess(true);
     } catch (e) {
+      setLoading(false);
+      setOpenError(true);
       console.log(e.message);
     }
   };
@@ -157,6 +162,12 @@ function EditView({ match }) {
           </form>
           </div>
         </div>
+        <SnackbarComponent open={openSuccess} setOpen={setOpenSuccess} severity={"success"}>
+          Successfully updated Device
+        </SnackbarComponent>
+        <SnackbarComponent open={openError} setOpen={setOpenError} severity={"error"}>
+          Error while updating Device
+        </SnackbarComponent>
       </DashboardLayout>
     </div>
   );
