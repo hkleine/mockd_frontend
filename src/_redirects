@@ -1,0 +1,3 @@
+
+/api/*   https://cryptic-garden-17004.herokuapp.com/api/:splat  200
+/*   /index.html   200
