@@ -25,7 +25,7 @@ function Dashboard() {
         const accessToken = await getAccessTokenSilently({
           audience: process.env.REACT_APP_AUTH0_AUDIENCE,
         });
-        console.log(accessToken);
+        console.log(user, accessToken);
         const response = await axios({ method: 'get', url: `${process.env.REACT_APP_API}/api/user/${user.sub}/devices/`,
           headers: {
             Authorization: `Bearer ${accessToken}`,
