@@ -79,6 +79,9 @@ function EditView({ match }) {
     register({ name: 'data' });
     getDevice();
     const client = new WebSocket('wss://mockd-backend.herokuapp.com/');
+    client.on('open', () => {
+      console.log('connect');
+    });
   }, [register]);
 
   if (isLoading) {
