@@ -66,6 +66,7 @@ function EditView({ match }) {
       setSensor(response.data);
       setValue('data', response.data.data);
       setLoading(false);
+      return
     } catch (e) {
       console.log(e.message);
     }
@@ -78,10 +79,12 @@ function EditView({ match }) {
   useEffect(() => {
     register({ name: 'data' });
     getDevice();
-    const client = new WebSocket(`wss://mockd-backend.herokuapp.com/devices/moin/logs`);
+    const client = new WebSocket(`wss://mockd-backend.herokuapp.com/devices/${params.id}/logs`);
+    client.onmessage = event => {
+      const cleanString = str => event.data.split('"')[1].replace(/'/g, '"');
+      console.log(JSON.parse(cleanString));
+    };
     client.onopen = () => {
-      client.send('Hello Server!');
-      console.log('connected websocket main component');
       client.onmessage = event => {
         console.log(event.data);
       };
