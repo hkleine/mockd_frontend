@@ -9,6 +9,7 @@ import 'jsoneditor-react/es/editor.min.css';
 import JSONInput from 'react-json-editor-ajrm';
 import locale from 'react-json-editor-ajrm/locale/en';
 import { NavLink } from 'react-router-dom';
+import { useBeforeunload } from 'react-beforeunload';
 
 function EditView({ match }) {
   let params = match.params;
@@ -16,6 +17,7 @@ function EditView({ match }) {
   const [isLoading, setLoading] = useState(true);
   const [sensor, setSensor] = useState();
   const [logs, setLogs] = useState();
+  const [wsClient, setWsClient] = useState();
   const [openSuccess, setOpenSuccess] = React.useState(false);
   const [openError, setOpenError] = React.useState(false);
   const { handleSubmit, register, errors, setValue } = useForm();
@@ -42,7 +44,6 @@ function EditView({ match }) {
       });
       setSensor(response.data);
       setValue('data', response.data.data);
-      setLoading(false);
       setOpenSuccess(true);
     } catch (e) {
       setLoading(false);
@@ -66,7 +67,6 @@ function EditView({ match }) {
       });
       setSensor(response.data);
       setValue('data', response.data.data);
-      setLoading(false);
       return;
     } catch (e) {
       console.log(e.message);
@@ -100,15 +100,25 @@ function EditView({ match }) {
 
   useEffect(() => {
     register({ name: 'data' });
-    getLogs();
-    getDevice();
+    Promise.all([getLogs(), getDevice()]).then(() => {
+      setLoading(false);
+    })
     const client = new WebSocket(`wss://mockd-backend.herokuapp.com/devices/${params.id}/logs`);
+    setWsClient(client);
     client.onopen = () => {
       client.onmessage = event => {
         console.log(JSON.parse(event.data).fullDocument);
       };
     };
+    client.onclose = () => {
+      console.log("closing ws");
+    };
   }, [register]);
+
+  useBeforeunload((event) => {
+    console.log("Moin");
+    wsClient.close();
+  });
 
   if (isLoading) {
     return <Loading />;
