@@ -86,7 +86,7 @@ function EditView({ match }) {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      setLogs(response.data);
+      setLogs(response.data.reverse());
       console.log(response.data);
       return;
     } catch (e) {
@@ -107,6 +107,7 @@ function EditView({ match }) {
     setWsClient(client);
     client.onopen = () => {
       client.onmessage = event => {
+        console.log(logs);
         console.log(JSON.parse(event.data).fullDocument);
       };
     };
@@ -116,7 +117,6 @@ function EditView({ match }) {
   }, [register]);
 
   useBeforeunload((event) => {
-    console.log("Moin");
     wsClient.close();
   });
 
