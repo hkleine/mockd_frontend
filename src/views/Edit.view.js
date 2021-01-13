@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { DashboardLayout } from '../layouts';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -10,6 +10,7 @@ import JSONInput from 'react-json-editor-ajrm';
 import locale from 'react-json-editor-ajrm/locale/en';
 import { NavLink } from 'react-router-dom';
 import { useBeforeunload } from 'react-beforeunload';
+import socketIOClient from "socket.io-client";
 
 function EditView({ match }) {
   let params = match.params;
@@ -21,10 +22,15 @@ function EditView({ match }) {
   const [openSuccess, setOpenSuccess] = React.useState(false);
   const [openError, setOpenError] = React.useState(false);
   const { handleSubmit, register, errors, setValue } = useForm();
+  const [messages, setMessages] = useState([]); // Sent and received messages
+  const socketRef = useRef();
 
   const onSubmit = async data => {
     await updateDevice(data);
   };
+
+  const NEW_CHAT_MESSAGE_EVENT = "newData"; // Name of the event
+  const SOCKET_SERVER_URL = "https://mockd-backend.herokuapp.com/";
 
   const updateDevice = async newSensor => {
     newSensor.interval = `PT${newSensor.interval}S`;
@@ -103,20 +109,26 @@ function EditView({ match }) {
     Promise.all([getLogs(), getDevice()]).then(() => {
       setLoading(false);
     })
-    const client = new WebSocket(`wss://mockd-backend.herokuapp.com/devices/${params.id}/logs`);
-    setWsClient(client);
-    client.onopen = () => {
-      client.onmessage = event => {
-        console.log(logs);
-        console.log(JSON.parse(event.data).fullDocument);
-      };
-    };
-    client.onclose = () => {
-      console.log("closing ws");
+
+      // Creates a WebSocket connection
+      socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
+        query: { deviceId: params.id },
+      });
+
+    // Listens for incoming messages
+    socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
+      console.log(message);
+    });
+    
+    // Destroys the socket reference
+    // when the connection is closed
+    return () => {
+      socketRef.current.disconnect();
     };
   }, [register]);
 
   useBeforeunload((event) => {
+    console.log("unloading");
     wsClient.close();
   });
 

@@ -70,3 +70,31 @@ code {
   box-shadow: 0 20px 75px rgba(0, 0, 0, 0.23);
   color: #2d3748;
 }
+
+.labl {
+  display : block;
+  cursor:pointer;
+}
+
+.labl > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+
+.labl > input + div{ /* DIV STYLES */
+  border: 2px solid #4a5568;
+  border-radius: 10px;
+}
+.labl > input:checked + div { /* (RADIO CHECKED) DIV STYLES */
+  border: 2px solid #5D40B8;
+  color: #5D40B8;
+  background-color: #fbf4ff;
+  border-radius: 10px;
+}
+
+.labl > div:hover { /* (RADIO CHECKED) DIV STYLES */
+  border: 2px solid #5D40B8;
+  color: #5D40B8;
+  background-color: #fbf4ff;
+  border-radius: 10px;
+}

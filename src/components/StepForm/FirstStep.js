@@ -1,0 +1,43 @@
+import React, { Fragment } from "react"
+import Grid from "@material-ui/core/Grid"
+import FormControl from "@material-ui/core/FormControl"
+import InputLabel from "@material-ui/core/InputLabel"
+import Button from "@material-ui/core/Button"
+import { FormControlLabel, Radio, RadioGroup } from "@material-ui/core"
+
+// Destructuring props
+const FirstStep = ({ handleNext, handleChange, values: { protocol } }) => {
+  // Check if all values are not empty or if there are some error
+  const isValid = protocol.length > 0;
+
+  function NextButton() {
+    if (isValid) {
+      return <button className="bg-primary hover:bg-purple-700 text-white font-bold py-2 px-10 rounded shadow" disabled={!isValid} onClick={isValid ? handleNext : null} type="submit">Next</button>;
+    }
+    return <button className="bg-gray-500 hover:bg-gray-500 text-white font-bold py-2 px-10 rounded shadow" disabled type="submit">Next</button>;
+  }
+
+  return (
+    <Fragment>
+      <Grid container noValidate>
+          <h2 className="text-gray-700 text-2xl font-medium pb-2">Protocol</h2>
+          <span className="text-gray-700 text-sm pb-8">Which protocol should the virtual device comunicate on?</span>
+          <div class="flex flex-row w-full justify-between">
+            <label className="labl">
+                <input type="radio" aria-label="protocol" name="protocol" value="HTTP" onChange={handleChange}/>
+                <div className="max-w-sm rounded-lg overflow-hidden text-gray-700 text-xl font-medium shadow-lg bg-white p-8">HTTP</div>
+            </label>
+            <label className="labl">
+              <input type="radio" aria-label="protocol" name="protocol" value="MQTT" onChange={handleChange}/>
+              <div className="max-w-sm rounded-lg overflow-hidden text-gray-700 text-xl font-medium shadow-lg bg-white p-8">MQTT</div>
+            </label>
+          </div>
+      </Grid>
+      <div style={{ display: "flex", marginTop: 50, justifyContent: "flex-end" }}>
+        <NextButton />
+      </div>
+    </Fragment>
+  )
+}
+
+export default FirstStep
