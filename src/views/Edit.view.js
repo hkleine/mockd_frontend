@@ -110,10 +110,11 @@ function EditView({ match }) {
       setLoading(false);
     })
 
-      // Creates a WebSocket connection
-      socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
-        query: { deviceId: params.id },
-      });
+    // Creates a WebSocket connection
+    socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
+      query: { deviceId: params.id },
+      transport : ['websocket', 'polling']
+    });
 
     // Listens for incoming messages
     socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
