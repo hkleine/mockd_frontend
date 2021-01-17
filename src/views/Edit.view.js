@@ -112,7 +112,7 @@ function EditView({ match }) {
 
   useEffect(() => {
     // Creates a WebSocket connection
-    socketRef.current = io(process.env.REACT_APP_API, { withCredentials: true, transports: ['websocket', 'polling'], query: {"deviceId": params.id } });
+    socketRef.current = io(process.env.REACT_APP_API);
     socketRef.current.on('connect', () => {
       console.log("connected");
     });
