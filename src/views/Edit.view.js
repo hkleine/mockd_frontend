@@ -29,7 +29,7 @@ function EditView({ match }) {
     await updateDevice(data);
   };
 
-  const NEW_CHAT_MESSAGE_EVENT = "newData"; // Name of the event
+  const NEW_LOG_EVENT = "newData"; // Name of the event
 
   const updateDevice = async newSensor => {
     newSensor.interval = `PT${newSensor.interval}S`;
@@ -112,12 +112,14 @@ function EditView({ match }) {
 
   useEffect(() => {
     // Creates a WebSocket connection
-    socketRef.current = io(process.env.REACT_APP_API);
+    socketRef.current = io(process.env.REACT_APP_API, {
+      transports: ['websocket']
+    });
     socketRef.current.on('connect', () => {
       console.log("connected");
     });
     // Listens for incoming messages
-    socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
+    socketRef.current.on(NEW_LOG_EVENT, (message) => {
       console.log(message);
     });
     
