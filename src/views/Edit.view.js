@@ -21,7 +21,10 @@ function EditView({ match }) {
   const [openSuccess, setOpenSuccess] = React.useState(false);
   const [openError, setOpenError] = React.useState(false);
   const { handleSubmit, register, errors, setValue } = useForm();
-  const socketRef = useRef();
+  const socketRef = useRef(io(process.env.REACT_APP_API, {
+    transports: ['websocket'],
+    query: {deviceId: 'test'}
+  }));
 
   const onSubmit = async data => {
     await updateDevice(data);
@@ -110,10 +113,12 @@ function EditView({ match }) {
 
   useEffect(() => {
     // Creates a WebSocket connection
-    socketRef.current = io(process.env.REACT_APP_API, {
-      transports: ['websocket'],
-      query: {deviceId: 'test'}
-    });
+    // socketRef.current = io(process.env.REACT_APP_API, {
+    //   transports: ['websocket'],
+    //   query: {deviceId: 'test'}
+    // });
+
+    socketRef.current.open();
 
     socketRef.current.on('connect', () => {
       console.log("connected");
