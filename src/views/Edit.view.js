@@ -118,11 +118,10 @@ function EditView({ match }) {
     //   query: {deviceId: 'test'}
     // });
 
-    socketRef.current.open();
-
     socketRef.current.on('connect', () => {
       console.log("connected");
     });
+    
     // Listens for incoming messages
     socketRef.current.on(NEW_LOG_EVENT, (message) => {
       console.log(message);
