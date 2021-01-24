@@ -135,14 +135,6 @@ function EditView({ match }) {
     };
   }, []);
 
-
-
-
-  useBeforeunload((event) => {
-    console.log("unloading");
-    wsClient.close();
-  });
-
   if (isLoading) {
     return <Loading />;
   }
