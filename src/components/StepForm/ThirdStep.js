@@ -4,19 +4,45 @@ import FormControl from "@material-ui/core/FormControl"
 import InputLabel from "@material-ui/core/InputLabel"
 import Button from "@material-ui/core/Button"
 import { TextField } from "@material-ui/core"
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
 
 // Destructuring props
 const ThirdStep = ({ handleNext, handleBack, handleChange, values }) => {
   const { protocol, mqtt_host, mqtt_password, mqtt_topic, mqtt_username, http_host, http_port, http_method, http_auth_token, name } = values
   // Check if all values are not empty or if there are some error
   const isValid = name.length > 0;
+  const { getAccessTokenSilently } = useAuth0();
+
 
   const handleSubmit = () => {
     // Do whatever with the values
-    console.log(values)
+    console.log(values);
+    createDevice(values);
     // Show last compinent or success message
     handleNext()
   }
+
+  const createDevice = async (device) => {
+    try {
+      const accessToken = await getAccessTokenSilently({
+        audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+      });
+
+      const response = await axios({
+        method: 'post',
+        url: `${process.env.REACT_APP_API}/api/device/create`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        data: device
+      });
+
+      return;
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
   function SubmitButton() {
     if (isValid) {
