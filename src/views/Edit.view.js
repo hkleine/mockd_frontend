@@ -10,7 +10,8 @@ import JSONInput from 'react-json-editor-ajrm';
 import locale from 'react-json-editor-ajrm/locale/en';
 import { NavLink } from 'react-router-dom';
 import { io } from 'socket.io-client';
-import { Protocols } from '../types'
+import { Protocols } from '../types';
+import { updateDevice } from '../api';
 
 function EditView({ match }) {
   let params = match.params;
@@ -27,36 +28,16 @@ function EditView({ match }) {
   }));
 
   const onSubmit = async data => {
-    await updateDevice(data);
+    socketRef.current.disconnect();
+    setLoading(true);
+    const newDevice = await updateDevice(data);
+    console.log(newDevice);
+    setSensor(newDevice.data);
+    setValue('data', newDevice.data);
+    setLoading(false);
   };
 
   const NEW_LOG_EVENT = "newData";
-
-  const updateDevice = async newSensor => {
-    newSensor.interval = `PT${newSensor.interval}S`;
-    setLoading(true);
-    try {
-      const accessToken = await getAccessTokenSilently({
-        audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-      });
-
-      const response = await axios({
-        method: 'patch',
-        url: `${process.env.REACT_APP_API}/api/device/${params.id}/`,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        data: newSensor,
-      });
-      setSensor(response.data);
-      setValue('data', response.data.data);
-      setOpenSuccess(true);
-    } catch (e) {
-      setLoading(false);
-      setOpenError(true);
-      console.log(e.message);
-    }
-  };
 
   const getDevice = async () => {
     try {
