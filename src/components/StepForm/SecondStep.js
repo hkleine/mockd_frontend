@@ -1,6 +1,7 @@
 import React from "react"
 import Grid from "@material-ui/core/Grid"
 import {TextField, Button, Select, MenuItem, FormControl, InputLabel} from "@material-ui/core"
+import { HttpMethods } from '../../types'
 
 // Destructuring props
 const SecondStep = ({ handleNext, handleBack, handleChange, values: { protocol, mqtt_host, mqtt_password, mqtt_topic, mqtt_username, http_host, http_port, http_method, http_auth_token }, formErrors }) => {
@@ -113,9 +114,9 @@ const SecondStep = ({ handleNext, handleBack, handleChange, values: { protocol, 
                 margin="normal"
                 required
               >
-                <MenuItem value={"POST"}>POST</MenuItem>
-                <MenuItem value={"PUT"}>PUT</MenuItem>
-                <MenuItem value={"PATCH"}>PATCH</MenuItem>
+                <MenuItem value={HttpMethods.POST}>POST</MenuItem>
+                <MenuItem value={HttpMethods.PUT}>PUT</MenuItem>
+                <MenuItem value={HttpMethods.PATCH}>PATCH</MenuItem>
               </Select>
             </FormControl>
             </Grid>

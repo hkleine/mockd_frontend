@@ -1,4 +1,5 @@
 import React from "react";
+import { HttpMethods } from '../types';
 
 function ProtocolInputs({ sensor, setSensor, register }) {
   switch (sensor.protocol) {
@@ -43,9 +44,9 @@ function ProtocolInputs({ sensor, setSensor, register }) {
                   setSensor({...sensor});
                 }}
               >
-                <option value="POST">POST</option>
-                <option value="PUT">PUT</option>
-                <option value="PATCH">PATCH</option>
+                <option value={HttpMethods.POST}>POST</option>
+                <option value={HttpMethods.PUT}>PUT</option>
+                <option value={HttpMethods.PATCH}>PATCH</option>
               </select>
             </div>
 

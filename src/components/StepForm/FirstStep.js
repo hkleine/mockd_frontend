@@ -1,9 +1,6 @@
 import React, { Fragment } from "react"
 import Grid from "@material-ui/core/Grid"
-import FormControl from "@material-ui/core/FormControl"
-import InputLabel from "@material-ui/core/InputLabel"
-import Button from "@material-ui/core/Button"
-import { FormControlLabel, Radio, RadioGroup } from "@material-ui/core"
+import { Protocols } from '../../types';
 
 // Destructuring props
 const FirstStep = ({ handleNext, handleChange, values: { protocol } }) => {
@@ -24,11 +21,11 @@ const FirstStep = ({ handleNext, handleChange, values: { protocol } }) => {
           <span className="text-gray-700 text-sm pb-8">Which protocol should the virtual device comunicate on?</span>
           <div class="flex flex-row w-full justify-between">
             <label className="labl">
-                <input type="radio" aria-label="protocol" name="protocol" value="http" onChange={handleChange}/>
+                <input type="radio" aria-label="protocol" name="protocol" value={Protocols.HTTP} onChange={handleChange}/>
                 <div className="max-w-sm rounded-lg overflow-hidden text-gray-700 text-xl font-medium shadow-lg bg-white p-8">HTTP</div>
             </label>
             <label className="labl">
-              <input type="radio" aria-label="protocol" name="protocol" value="mqtt" onChange={handleChange}/>
+              <input type="radio" aria-label="protocol" name="protocol" value={Protocols.MQTT} onChange={handleChange}/>
               <div className="max-w-sm rounded-lg overflow-hidden text-gray-700 text-xl font-medium shadow-lg bg-white p-8">MQTT</div>
             </label>
           </div>
