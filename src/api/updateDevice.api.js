@@ -18,6 +18,7 @@ export default async function updateDevice(newDevice) {
         },
         data: newDevice,
       });
+      console.log("moin");
       return response;
     } catch (e) {
       console.log(e.message);

@@ -32,9 +32,9 @@ function EditView({ match }) {
     setLoading(true);
     const newDevice = await updateDevice(data);
     console.log(newDevice);
+    setLoading(false);
     setSensor(newDevice.data);
     setValue('data', newDevice.data);
-    setLoading(false);
   };
 
   const NEW_LOG_EVENT = "newData";
