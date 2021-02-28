@@ -58,7 +58,7 @@ function ProtocolInputs({ device, setDevice, register }) {
             </div>
             <div className="flex flex-col">
               <label className="text-gray-600">HTTP Port</label>
-              <input className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" defaultValue={device.http_port} type="number" name="http_port" ref={register()} />
+              <input className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" defaultValue={device.http_port || 0 } type="number" name="http_port" ref={register()} />
             </div>
           </div>
           
