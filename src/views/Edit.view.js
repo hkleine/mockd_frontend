@@ -28,9 +28,11 @@ function EditView({ match }) {
   }));
 
   const onSubmit = async data => {
-    socketRef.current.disconnect();
+    const accessToken = await getAccessTokenSilently({
+      audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+    });
     setLoading(true);
-    const newDevice = await updateDevice(data);
+    const newDevice = await updateDevice(data, accessToken);
     console.log(newDevice);
     setLoading(false);
     setSensor(newDevice.data);
