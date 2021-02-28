@@ -38,10 +38,9 @@ function EditView({ match }) {
   const NEW_LOG_EVENT = "newData";
 
   const getAccessToken = async () => {
-    const accessToken = await getAccessTokenSilently({
+    return await getAccessTokenSilently({
       audience: process.env.REACT_APP_AUTH0_AUDIENCE,
     });
-    setAccessToken(accessToken);
   }
 
   const intervalAsSeconds = interval => {
