@@ -33,7 +33,7 @@ function EditView({ match }) {
       audience: process.env.REACT_APP_AUTH0_AUDIENCE,
     });
     setLoading(true);
-    const newDevice = await updateDevice({...data, id: params.id}, accessToken);
+    const newDevice = await updateDevice({...data, _id: params.id}, accessToken);
     console.log(newDevice);
     setLoading(false);
     setSensor(newDevice.data);
