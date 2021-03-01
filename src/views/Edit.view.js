@@ -31,9 +31,9 @@ function EditView({ match }) {
     setLoading(true);
     const newDevice = await updateDevice({...data, _id: params.id}, await getAccessToken());
     console.log(newDevice);
-    setLoading(false);
     setDevice(newDevice.data);
     setValue('data', newDevice.data.data);
+    setLoading(false);
   };
 
   const NEW_LOG_EVENT = "newData";
