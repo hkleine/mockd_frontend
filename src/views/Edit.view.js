@@ -30,6 +30,7 @@ function EditView({ match }) {
     console.log("updating", data);
     setLoading(true);
     const newDevice = await updateDevice({...data, _id: params.id}, await getAccessToken());
+    console.log(newDevice);
     setLoading(false);
     setDevice(newDevice.data);
     setValue('data', newDevice.data.data);
