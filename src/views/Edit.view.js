@@ -34,6 +34,7 @@ function EditView({ match }) {
     setDevice(newDevice.data);
     setValue('data', newDevice.data.data);
     //setLoading(false);
+    setOpenSuccess(true)
   };
 
   const NEW_LOG_EVENT = "newData";
