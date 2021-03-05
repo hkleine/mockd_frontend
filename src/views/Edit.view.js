@@ -28,7 +28,8 @@ function EditView({ match }) {
   }));
   const NEW_LOG_EVENT = "newData";
 
-  const onSubmit = async data => {    setLoading(true);
+  const onSubmit = async data => {
+    setLoading(true);
     try {
       const newDevice = await updateDevice({...data, _id: params.id}, await getAccessToken());
       setDevice(newDevice.data);

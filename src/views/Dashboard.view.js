@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {DashboardLayout} from "../layouts";
 import { SensorGrid, Loading, SnackbarComponent } from '../components';
-import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
 import { remove } from 'lodash';
 import { getDevices } from '../api';
 
 function Dashboard(props  ) {
   const [isLoading, setLoading] = useState(true);
-  const { user, getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
   const [sensors, setSensors] = useState();
   const [openSuccess, setOpenSuccess] = React.useState(false);
   const [openError, setOpenError] = React.useState(false);
@@ -21,8 +20,7 @@ function Dashboard(props  ) {
     setSensors(sensors)
   }
 
-  useEffect(() => {
-    console.log(props.location.state);
+  function setSnackbarOpen() {
     if(props.location.state && props.location.state.deviceCreationSucceeded) {
       setOpenSuccess(true);
       window.history.replaceState(null, '');
@@ -30,25 +28,27 @@ function Dashboard(props  ) {
       setOpenError(true);
       window.history.replaceState(null, '');
     }
+  }
 
-    // mzss noch ersetzt werden durch api function
-    const getDevices = async () => {
+  useEffect(() => {
+    setSnackbarOpen();
+
+    const fetchDevices = async () => {
+      const accessToken = await getAccessTokenSilently({
+        audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+      });
       try {
-        const accessToken = await getAccessTokenSilently({
-          audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-        });
-        const response = await axios({ method: 'get', url: `${process.env.REACT_APP_API}/api/user/${user.sub}/devices/`,
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+        const response = await getDevices(accessToken)
         setSensors(response.data);
         setLoading(false);
-      } catch (e) {
-        console.log(e.message);
+      } catch (error) {
+        setSensors([]);
+        setLoading(false);
+        console.log(error);
       }
-    };
-    getDevices();
+    }
+
+    fetchDevices();
   }, []);
 
   if (isLoading) {
