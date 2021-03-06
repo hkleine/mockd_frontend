@@ -10,7 +10,7 @@ import { SubmitButton } from '../'
 
 // Destructuring props
 const ThirdStep = ({ handleNext, handleBack, handleChange, values }) => {
-  const { protocol, mqtt_host, mqtt_password, mqtt_topic, mqtt_username, http_host, http_port, http_method, http_auth_token, name } = values
+  const { name } = values
   // Check if all values are not empty or if there are some error
   const isValid = name.length > 0;
   const { getAccessTokenSilently } = useAuth0();

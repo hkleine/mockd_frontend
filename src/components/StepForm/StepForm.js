@@ -7,7 +7,6 @@ import SecondStep from "./SecondStep"
 import ThirdStep from "./ThirdStep"
 import formValidation from "./Helper/formValidation"
 import { Redirect } from "react-router-dom";
-import SnackbarComponent from "../SnackbarComponent"
  
 // Step titles
 const labels = ["First Step", "Second Step", "Third Step"]

@@ -7,7 +7,7 @@ function ProfileView() {
       <DashboardLayout>
         <div className="flex flex-col">
           <div className="flex flex-row justify-between">
-            <h1 className="">Prfile</h1>
+            <h1 className="">Profile</h1>
             <span>Moin</span>
           </div>
         </div>

@@ -15,6 +15,7 @@ const App = () => {
         <PrivateRoute path="/statistics" exact component={StatisticView} />
         <PrivateRoute path="/edit/:id" exact component={EditView} />
         <PrivateRoute path="/add" exact component={AddView} />
+        <PrivateRoute path="/profile" exact component={ProfileView} />
       </Switch>
     </div>
   );

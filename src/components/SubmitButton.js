@@ -1,7 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { HiOutlinePlus } from 'react-icons/hi';
-import { IconContext } from 'react-icons';
 
 const SubmitButton = (props) => {
   if (props.isValid) {

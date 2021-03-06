@@ -66,10 +66,10 @@ function EditView({ match }) {
         setLoading(false);
       })
     })();
-  }, [register]);
+  }, [register, getAccessTokenSilently, params.id]);
 
   useEffect(() => {
-    socketRef.current.on('connect', () => {
+    socketRef.current.on('connect', (socket) => {
       console.log("connected");
     });
     
@@ -83,7 +83,7 @@ function EditView({ match }) {
     return () => {
       socketRef.current.disconnect();
     };
-  }, []);
+  });
 
   if (isLoading) {
     return <Loading />;
