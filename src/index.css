@@ -98,3 +98,7 @@ code {
   background-color: #fbf4ff;
   border-radius: 10px;
 }
+
+.logs-container {
+  height: 500px;
+}

@@ -70,8 +70,9 @@ function EditView({ match }) {
     });
     
     // Listens for incoming messages
-    socket.on(params.id, (message) => {
-      console.log(message);
+    socket.on(params.id, (log) => {
+      console.log(log);
+      setLogs(prevLogs => [...prevLogs, log]);
     });
 
     return () => {
@@ -80,15 +81,6 @@ function EditView({ match }) {
     };
 
   }, []);
-
-  // useEffect(() => {
-  //   // Destroys the socket reference
-  //   // when the connection is closed
-  //   return () => {
-  //     console.log("disconnecting");
-  //     socket.disconnect();
-  //   };
-  // })
 
   if (isLoading) {
     return <Loading />;
@@ -101,8 +93,8 @@ function EditView({ match }) {
           <div className="flex flex-row justify-between">
             <h1 className="text-gray-700 text-2xl font-medium pb-12">Edit {device.name}</h1>
           </div>
-          <div className="flex flex-row justify-bewteen">
-          <div className="rounded-lg overflow-hidden shadow-sm bg-white p-4 max-w-screen-md p-16">
+          <div className="flex flex-row">
+          <div className="rounded-lg overflow-hidden shadow-sm bg-white p-4 max-w-screen-xs p-16">
             <DeviceToggleButton device={device} setDevice={setDevice} />
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
               <div className="flex flex-col pb-12 max-w-lg">
@@ -191,9 +183,9 @@ function EditView({ match }) {
             </form>
           </div>
 
-          <div className="rounded-lg shadow-sm bg-gray-400 p-4 max-w-screen-md p-16 flex flex-col">
-            {logs.map((log, index) => {
-              return <span key={index}>{log.time_stamp} [{log.severity}] {log.text}</span>
+          <div className="logs-container rounded-lg shadow-sm bg-gray-400 max-w-screen-md py-16 px-6 flex flex-col-reverse overflow-y-scroll overflow-x-hidden">
+            {logs.reverse().map((log, index) => {
+              return <span className="text-sm" key={index}><span className="font-medium">{log.time_stamp} [{log.severity}]:</span> <span className="ml-2">{log.text}</span></span>
             })}
           </div>
           </div>
