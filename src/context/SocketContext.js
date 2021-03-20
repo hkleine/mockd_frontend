@@ -5,7 +5,7 @@ const SocketContext = React.createContext()
 
 const SocketProvider = ({ children }) => {
     const socket = io(process.env.REACT_APP_API, {
-        transports: ['websocket'],
+        transports: ['websocket'], upgrade: false
       });
     return (
         <SocketContext.Provider value={socket}>

@@ -9,18 +9,15 @@ import { SocketProvider } from './context/SocketContext';
 
 const App = () => {
   return (
-    <div i
-    d="app" className="d-flex flex-column h-100 h-screen bg-gray-200">
-      <SocketProvider>
+    <div id="app" className="d-flex flex-column h-100 h-screen bg-gray-200">
         <Switch>
           <PrivateRoute path="/" exact component={Dashboard} />
           <PrivateRoute path="/alerts" exact component={AlertView} />
           <PrivateRoute path="/statistics" exact component={StatisticView} />
-          <PrivateRoute path="/edit/:id" exact component={EditView} />
+          <SocketProvider><PrivateRoute path="/edit/:id" exact component={EditView} /></SocketProvider>
           <PrivateRoute path="/add" exact component={AddView} />
           <PrivateRoute path="/profile" exact component={ProfileView} />
         </Switch>
-      </SocketProvider>
     </div>
   );
 };
