@@ -57,7 +57,7 @@ function EditView({ match }) {
         audience: process.env.REACT_APP_AUTH0_AUDIENCE,
       });
       Promise.all([getLogs(params.id, accessToken), getDevice(params.id, accessToken)]).then((data) => {
-        setLogs(data[0]);
+        setLogs(data[0].reverse());
         setDevice(data[1].data);
         setLoading(false);
       })
@@ -72,7 +72,7 @@ function EditView({ match }) {
     // Listens for incoming messages
     socket.on(params.id, (log) => {
       console.log(log);
-      setLogs(prevLogs => [...prevLogs, log]);
+      setLogs(prevLogs => [log, ...prevLogs]);
     });
 
     return () => {
@@ -184,7 +184,7 @@ function EditView({ match }) {
           </div>
 
           <div className="logs-container rounded-lg shadow-sm bg-gray-400 max-w-screen-md py-16 px-6 flex flex-col-reverse overflow-y-scroll overflow-x-hidden">
-            {logs.reverse().map((log, index) => {
+            {logs.map((log, index) => {
               return <span className="text-sm" key={index}><span className="font-medium">{log.time_stamp} [{log.severity}]:</span> <span className="ml-2">{log.text}</span></span>
             })}
           </div>
