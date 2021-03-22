@@ -6,25 +6,25 @@ import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import 'jsoneditor-react/es/editor.min.css';
 import JSONInput from 'react-json-editor-ajrm';
-import locale from 'react-json-editor-ajrm/locale/en';
 import { NavLink } from 'react-router-dom';
 import { Protocols } from '../types';
 import { updateDevice, getDevice, getLogs } from '../api';
-import { SocketContext } from '../context/SocketContext'
+import { SocketContext } from '../context/SocketContext';
+import { Device, Log } from "../types";
 
-function EditView({ match }) {
+function EditView({ match }: any) {
   let params = match.params;
   const { getAccessTokenSilently } = useAuth0();
   const [isLoading, setLoading] = useState(true);
-  const [device, setDevice] = useState();
-  const [logs, setLogs] = useState();
+  const [device, setDevice] = useState<Device>();
+  const [logs, setLogs] = useState<Log[]>();
   const [openSuccess, setOpenSuccess] = React.useState(false);
   const [openError, setOpenError] = React.useState(false);
   const [errorText, setErrorText] = React.useState("");
   const { handleSubmit, register, errors, setValue } = useForm();
   const socket = useContext(SocketContext)
 
-  const onSubmit = async data => {
+  const onSubmit = async (data:Device) => {
     setLoading(true);
     try {
       const newDevice = await updateDevice({...data, _id: params.id}, await getAccessToken());
@@ -46,7 +46,7 @@ function EditView({ match }) {
     });
   }
 
-  const intervalAsSeconds = interval => {
+  const intervalAsSeconds = (interval: string) => {
     return moment.duration(interval).asSeconds();
   };
 
@@ -70,9 +70,9 @@ function EditView({ match }) {
     });
     
     // Listens for incoming messages
-    socket.on(params.id, (log) => {
+    socket.on(params.id, (log: Log) => {
       console.log(log);
-      setLogs(prevLogs => [log, ...prevLogs]);
+      setLogs(prevLogs => [log, ...prevLogs as Log[]]);
     });
 
     return () => {

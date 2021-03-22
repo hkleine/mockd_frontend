@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Props } from "react";
+import { RouteComponentProps } from 'react-router';
 import {DashboardLayout} from "../layouts";
 import { SensorGrid, Loading, SnackbarComponent } from '../components';
 import { useAuth0 } from "@auth0/auth0-react";
-import { remove } from 'lodash';
+import { List, remove } from 'lodash';
 import { getDevices } from '../api';
+import { Device } from '../types';
 
-function Dashboard(props  ) {
+function Dashboard(props: RouteComponentProps) {
   const [isLoading, setLoading] = useState(true);
   const { getAccessTokenSilently } = useAuth0();
-  const [sensors, setSensors] = useState();
+  const [devices, setDevices] = useState<Device[]>();
   const [openSuccess, setOpenSuccess] = React.useState(false);
   const [openError, setOpenError] = React.useState(false);
 
-  function updateSensors(updatedSensor) {
-    setSensors([]);
-    remove(sensors, function (s) {
-      return s._id === updatedSensor._id;
+  function updatedevices(updatedDevice: Device) {
+    setDevices([]);
+    remove(devices as List<Device>, function (device: Device) {
+      return device._id === updatedDevice._id;
     });
-    setSensors(sensors)
+    setDevices(devices)
   }
 
   function setSnackbarOpen() {
@@ -39,10 +41,10 @@ function Dashboard(props  ) {
       });
       try {
         const response = await getDevices(accessToken)
-        setSensors(response.data);
+        setDevices(response.data);
         setLoading(false);
       } catch (error) {
-        setSensors([]);
+        setDevices([]);
         setLoading(false);
         console.log(error);
       }
@@ -64,7 +66,7 @@ function Dashboard(props  ) {
           <div className="flex flex-row justify-between">
             <h1 className="text-gray-700 text-2xl font-medium pb-12">Dashboard</h1>
           </div>
-          <SensorGrid sensors={sensors} updateSensors={updateSensors} />
+          <SensorGrid sensors={devices} updateSensors={updatedevices} />
         </div>
       </DashboardLayout>
       <SnackbarComponent open={openSuccess} setOpen={setOpenSuccess} severity={'success'}>
