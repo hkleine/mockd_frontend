@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Props } from "react";
+import React, { useState, useEffect } from "react";
 import { RouteComponentProps } from 'react-router';
 import {DashboardLayout} from "../layouts";
 import { SensorGrid, Loading, SnackbarComponent } from '../components';

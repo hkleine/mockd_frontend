@@ -5,7 +5,6 @@ import { DeviceToggleButton, Loading, ProtocolInputs, SnackbarComponent } from '
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import 'jsoneditor-react/es/editor.min.css';
-import JSONInput from 'react-json-editor-ajrm';
 import { NavLink } from 'react-router-dom';
 import { Protocols } from '../types';
 import { updateDevice, getDevice, getLogs } from '../api';
