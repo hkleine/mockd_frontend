@@ -1,30 +1,29 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DashboardLayout } from '../layouts';
 import { useAuth0 } from '@auth0/auth0-react';
 import { DeviceToggleButton, Loading, ProtocolInputs, SnackbarComponent } from '../components';
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import 'jsoneditor-react/es/editor.min.css';
-import JSONInput from 'react-json-editor-ajrm';
-import locale from 'react-json-editor-ajrm/locale/en';
 import { NavLink } from 'react-router-dom';
 import { Protocols } from '../types';
 import { updateDevice, getDevice, getLogs } from '../api';
-import { SocketContext } from '../context/SocketContext'
+import { SocketContext } from '../context/SocketContext';
+import { Device, Log } from "../types";
 
-function EditView({ match }) {
+function EditView({ match }: any) {
   let params = match.params;
   const { getAccessTokenSilently } = useAuth0();
   const [isLoading, setLoading] = useState(true);
-  const [device, setDevice] = useState();
-  const [logs, setLogs] = useState();
+  const [device, setDevice] = useState<Device | null>(null);
+  const [logs, setLogs] = useState<Log[]>();
   const [openSuccess, setOpenSuccess] = React.useState(false);
   const [openError, setOpenError] = React.useState(false);
   const [errorText, setErrorText] = React.useState("");
   const { handleSubmit, register, errors, setValue } = useForm();
   const socket = useContext(SocketContext)
 
-  const onSubmit = async data => {
+  const onSubmit = async (data:Device) => {
     setLoading(true);
     try {
       const newDevice = await updateDevice({...data, _id: params.id}, await getAccessToken());
@@ -46,7 +45,7 @@ function EditView({ match }) {
     });
   }
 
-  const intervalAsSeconds = interval => {
+  const intervalAsSeconds = (interval: string) => {
     return moment.duration(interval).asSeconds();
   };
 
@@ -70,9 +69,8 @@ function EditView({ match }) {
     });
     
     // Listens for incoming messages
-    socket.on(params.id, (log) => {
-      console.log(log);
-      setLogs(prevLogs => [log, ...prevLogs]);
+    socket.on(params.id, (log: Log) => {
+      setLogs(prevLogs => [log, ...prevLogs as Log[]]);
     });
 
     return () => {
@@ -83,10 +81,11 @@ function EditView({ match }) {
   }, []);
 
   if (isLoading) {
-    return <Loading />;
+    return <Loading isLoading={true}/>;
   }
 
   return (
+    device && logs ?
     <div>
       <DashboardLayout>
         <div className="flex flex-col pb-12">
@@ -148,7 +147,7 @@ function EditView({ match }) {
               <div className="flex flex-col pb-12 w-full">
                 <label className="text-gray-600">JSON Data</label>
                 <div className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none">
-                  <JSONInput
+                  {/* <JSONInput
                     id="a_unique_id"
                     placeholder={device.data}
                     locale={locale}
@@ -161,7 +160,7 @@ function EditView({ match }) {
                       number: '#667eea',
                       colon: '#4a5568',
                     }}
-                  />
+                  /> */}
                 </div>
               </div>
 
@@ -198,6 +197,7 @@ function EditView({ match }) {
         </SnackbarComponent>
       </DashboardLayout>
     </div>
+    : null
   );
 }
 
