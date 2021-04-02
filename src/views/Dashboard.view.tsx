@@ -3,24 +3,17 @@ import { RouteComponentProps } from 'react-router';
 import {DashboardLayout} from "../layouts";
 import { DeviceGrid, Loading, SnackbarComponent } from '../components';
 import { useAuth0 } from "@auth0/auth0-react";
-import { List, remove } from 'lodash';
 import { getDevices } from '../api';
 import { Device } from '../types';
+import { DevicesContext } from "../context";
 
 export function Dashboard(props: RouteComponentProps) {
   const [isLoading, setLoading] = useState(true);
   const { getAccessTokenSilently } = useAuth0();
   const [devices, setDevices] = useState<Device[]>();
+  const value = {devices, setDevices}
   const [openSuccess, setOpenSuccess] = React.useState(false);
   const [openError, setOpenError] = React.useState(false);
-
-  function updatedevices(updatedDevice: Device) {
-    setDevices([]);
-    remove(devices as List<Device>, function (device: Device) {
-      return device._id === updatedDevice._id;
-    });
-    setDevices(devices)
-  }
 
   function setSnackbarOpen() {
     if(props.location.state && props.location.state.deviceCreationSucceeded) {
@@ -51,7 +44,7 @@ export function Dashboard(props: RouteComponentProps) {
     }
 
     fetchDevices();
-  }, []);
+  });
 
   if (isLoading) {
     return (
@@ -66,7 +59,9 @@ export function Dashboard(props: RouteComponentProps) {
           <div className="flex flex-row justify-between">
             <h1 className="text-gray-700 text-2xl font-medium pb-12">Dashboard</h1>
           </div>
-          <DeviceGrid devices={devices} updateDevice={updatedevices} />
+          <DevicesContext.Provider value={{devices: devices, setCurrentDevices: setDevices}}>
+            <DeviceGrid  />
+          </DevicesContext.Provider>
         </div>
       </DashboardLayout>
       <SnackbarComponent open={openSuccess} setOpen={setOpenSuccess} severity={'success'}>

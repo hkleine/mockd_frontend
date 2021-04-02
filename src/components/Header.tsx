@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Searchbar from "./Searchbar"
+import { UserContext } from '../context/';
 
 
-const Header = ({user}: any) => {
+const Header = () => {
+  const user = useContext(UserContext)
+
     return (
       <header className="flex w-full justify-between items-center py-8 pr-20 pl-12 bg-gray-200 bg-opacity-75">
         <Searchbar />

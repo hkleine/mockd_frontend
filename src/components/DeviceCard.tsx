@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from 'react-router-dom';
 
 import { DeleteDialog, DeviceToggleButton } from '.';
@@ -8,13 +8,25 @@ import axios from 'axios';
 import "react-toggle/style.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import moment, { Duration } from 'moment';
+import { Device } from "../types";
+import { DevicesContext } from "../context";
+import { List, remove } from "lodash";
 
 
-function DeviceCard({deviceIn, updateDevice}: any) {
+function DeviceCard({deviceIn}: any) {
     const { getAccessTokenSilently } = useAuth0();
     const [device, setDevice] = useState(deviceIn);
     const [open, setOpen] = useState(false);
     const editUrl = `/edit/${deviceIn._id}`;
+    const {devices, setCurrentDevices} = useContext(DevicesContext)
+
+    function updatedevices(updatedDevice: Device) {
+        setCurrentDevices([]);
+        remove(devices as List<Device>, function (device: Device) {
+          return device._id === updatedDevice._id;
+        });
+        setCurrentDevices(devices)
+    }
 
     async function deleteDevice() {
         const accessToken = await getAccessTokenSilently({
@@ -22,7 +34,7 @@ function DeviceCard({deviceIn, updateDevice}: any) {
         });
         axios({ method: 'delete', url: `${process.env.REACT_APP_API}/api/device/${device._id}`, headers: {Authorization: `Bearer ${accessToken}`,} })
         .then(() => {
-            updateDevice(device);
+            updatedevices(device);
         });
     }
 
