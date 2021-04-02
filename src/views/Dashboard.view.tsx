@@ -7,7 +7,7 @@ import { List, remove } from 'lodash';
 import { getDevices } from '../api';
 import { Device } from '../types';
 
-function Dashboard(props: RouteComponentProps) {
+export function Dashboard(props: RouteComponentProps) {
   const [isLoading, setLoading] = useState(true);
   const { getAccessTokenSilently } = useAuth0();
   const [devices, setDevices] = useState<Device[]>();
@@ -78,5 +78,3 @@ function Dashboard(props: RouteComponentProps) {
   </div>
   );
 }
-
-export default Dashboard;

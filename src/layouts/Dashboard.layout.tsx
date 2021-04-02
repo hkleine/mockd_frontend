@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import {SideNav, Header, DashboardContent} from "../components";
 
-const DashboardLayout = ({children}: any) => {
+export const DashboardLayout = ({children}: any) => {
   const { user, isAuthenticated } = useAuth0();
   return (
     <div>
@@ -20,5 +20,3 @@ const DashboardLayout = ({children}: any) => {
     </div>
   );
 }
-
-export default DashboardLayout;

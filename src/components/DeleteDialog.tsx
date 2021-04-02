@@ -3,13 +3,13 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function DeleteDialog({open, setOpen, deleteSensor}: any) {
+export default function DeleteDialog({open, setOpen, deleteDevice}: any) {
   const handleClose = () => {
     setOpen(false);
   };
 
   const handleDelete = async () => {
-    await deleteSensor()
+    await deleteDevice()
   } 
 
   return (

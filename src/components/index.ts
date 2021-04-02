@@ -14,7 +14,8 @@ import SnackbarComponent from './SnackbarComponent';
 import SubmitButton from './SubmitButton';
 import DeviceToggleButton from './DeviceToggleButton';
 
-export * from './DeviceGrid'
+export * from './DeviceGrid';
+export * from './StepForm';
 export {
   PrivateRoute,
   Loading,

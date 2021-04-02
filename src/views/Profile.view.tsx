@@ -1,7 +1,7 @@
 import React from "react";
 import {DashboardLayout} from "../layouts"
 
-function ProfileView() {
+export function ProfileView() {
   return (
     <div>
       <DashboardLayout>
@@ -15,5 +15,3 @@ function ProfileView() {
     </div>
   );
 }
-
-export default ProfileView;

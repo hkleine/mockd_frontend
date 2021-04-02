@@ -1,7 +1,7 @@
 import React from "react";
 import {DashboardLayout} from "../layouts"
 
-function AlertView() {
+export function AlertView() {
   return (
     <div>
       <DashboardLayout>
@@ -15,5 +15,3 @@ function AlertView() {
     </div>
   );
 }
-
-export default AlertView;

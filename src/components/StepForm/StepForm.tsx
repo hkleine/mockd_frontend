@@ -47,7 +47,7 @@ const fieldsValidation = {
   },
   http_method: {
     error: "",
-    validate: "method",
+    validate: "text",
     minLength: 2,
     maxLength: 20
   },
@@ -88,25 +88,24 @@ const fieldsValidation = {
   }
 }
 
-const StepForm = () => {
+export const StepForm = () => {
   const [activeStep, setActiveStep] = useState(0)
   const [formValues, setFormValues] = useState(defaultDevice)
   const [formErrors, setFormErrors] = useState({})
-  const [hasCreationSucceeded, setHasDeviceCrationSucceeded] = React.useState(false);
+  const [hasCreationSucceeded, setHasDeviceCrationSucceeded] = useState(false);
 
   // Proceed to next step
-  const handleNext = (hasCreationSucceeded) => {
+  const handleNext = (hasCreationSucceeded: boolean) => {
     setHasDeviceCrationSucceeded(hasCreationSucceeded);
-    console.log(hasCreationSucceeded);
     setActiveStep(prev => prev + 1)
   }
   // Go back to prev step
   const handleBack = () => setActiveStep(prev => prev - 1)
 
   // Handle form change
-  const handleChange = e => {
-    const { name, value } = e.target
-
+  const handleChange = (event: React.FormEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = event.currentTarget
+    console.log(name);
     // Set values
     setFormValues(prev => ({
       ...prev,
@@ -121,7 +120,7 @@ const StepForm = () => {
     })
   }
 
-  const handleSteps = step => {
+  const handleSteps = (step: number) => {
     switch (step) {
       case 0:
         return (
@@ -166,5 +165,3 @@ const StepForm = () => {
     </div>
   )
 }
-
-export default StepForm

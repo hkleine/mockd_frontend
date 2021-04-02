@@ -1,3 +1,1 @@
-import DashboardLayout from './Dashboard.layout';
-
-export { DashboardLayout };
+export * from './Dashboard.layout'

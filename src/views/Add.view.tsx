@@ -1,8 +1,8 @@
 import React from 'react';
+import { StepForm } from '../components';
 import { DashboardLayout } from '../layouts';
-import StepForm from '../components/StepForm/StepForm'
 
-function AddView() {
+export function AddView() {
   return (
     <div>
       <DashboardLayout>
@@ -13,5 +13,3 @@ function AddView() {
     </div>
   );
 }
-
-export default AddView;

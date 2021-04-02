@@ -2,11 +2,11 @@ import React from "react"
 import Grid from "@material-ui/core/Grid"
 import {TextField, Button, Select, MenuItem, FormControl, InputLabel} from "@material-ui/core"
 import { HttpMethods } from '../../types'
-import { SubmitButton } from '../'
+import { SubmitButton } from '..'
 
 
 // Destructuring props
-const SecondStep = ({ handleNext, handleBack, handleChange, values: { protocol, mqtt_host, mqtt_password, mqtt_topic, mqtt_username, http_host, http_method, http_auth_token }, formErrors }) => {
+const SecondStep = ({ handleNext, handleBack, handleChange, values: { protocol, mqtt_host, mqtt_password, mqtt_topic, mqtt_username, http_host, http_method, http_auth_token }, formErrors }: any) => {
   // Check if all values are not empty or if there are some error
   const isValid = (mqtt_host.length > 0 && mqtt_username.length > 0 && mqtt_topic.length > 0) || (http_host.length > 0 && http_method.length > 0);
 
@@ -22,7 +22,6 @@ const SecondStep = ({ handleNext, handleBack, handleChange, values: { protocol, 
             name="mqtt_host"
             value={mqtt_host || ""}
             placeholder="e.g test.dummymqtt.com:1111"
-            margin="normal"
             onChange={handleChange}
             // error={!!formErrors.city}
             // helperText={formErrors.city}
@@ -34,7 +33,6 @@ const SecondStep = ({ handleNext, handleBack, handleChange, values: { protocol, 
             name="mqtt_topic"
             value={mqtt_topic || ""}
             onChange={handleChange}
-            margin="normal"
             required
           />
         </Grid>
@@ -45,7 +43,6 @@ const SecondStep = ({ handleNext, handleBack, handleChange, values: { protocol, 
             name="mqtt_username"
             value={mqtt_username || ""}
             onChange={handleChange}
-            margin="normal"
             required
           />
         </Grid>
@@ -60,7 +57,6 @@ const SecondStep = ({ handleNext, handleBack, handleChange, values: { protocol, 
             onChange={handleChange}
             // error={!!formErrors.phone}
             // helperText={formErrors.phone}
-            margin="normal"
           />
         </Grid>
         <div style={{ display: "flex", marginTop: 50, justifyContent: "flex-end" }}>
@@ -80,7 +76,6 @@ const SecondStep = ({ handleNext, handleBack, handleChange, values: { protocol, 
                 name="http_host"
                 value={http_host || ""}
                 placeholder="e.g testhttp.com:1111"
-                margin="normal"
                 onChange={handleChange}
                 // error={!!formErrors.city}
                 // helperText={formErrors.city}
@@ -88,7 +83,7 @@ const SecondStep = ({ handleNext, handleBack, handleChange, values: { protocol, 
               />
             </Grid>
             <Grid item xs={12}>
-            <FormControl fullWidth margin="normal">
+            <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">HTTP Method *</InputLabel>
               <Select
                 fullWidth
@@ -96,7 +91,6 @@ const SecondStep = ({ handleNext, handleBack, handleChange, values: { protocol, 
                 name="http_method"
                 value={http_method}
                 onChange={handleChange}
-                margin="normal"
                 required
               >
                 <MenuItem value={HttpMethods.POST}>POST</MenuItem>
@@ -115,7 +109,6 @@ const SecondStep = ({ handleNext, handleBack, handleChange, values: { protocol, 
                 onChange={handleChange}
                 // error={!!formErrors.phone}
                 // helperText={formErrors.phone}
-                margin="normal"
               />
             </Grid>
               <div style={{ display: "flex", marginTop: 50, justifyContent: "flex-end" }}>

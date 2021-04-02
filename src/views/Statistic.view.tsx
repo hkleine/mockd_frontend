@@ -1,7 +1,7 @@
 import React from "react";
 import {DashboardLayout} from "../layouts"
 
-function StatisticView() {
+export function StatisticView() {
   return (
     <div>
       <DashboardLayout>
@@ -15,5 +15,3 @@ function StatisticView() {
     </div>
   );
 }
-
-export default StatisticView;

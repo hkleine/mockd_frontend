@@ -1,3 +1,1 @@
-import StepForm from "./StepForm";
-
-export { StepForm };
+export * from './StepForm'

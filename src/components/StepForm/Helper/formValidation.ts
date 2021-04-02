@@ -4,7 +4,8 @@ const isPhone = RegExp(/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4,6})$/) // us
 const isZip = RegExp(/^[0-9]{5}([- /]?[0-9]{4})?$/) // us
 const isNumber = RegExp(/^\d+$/)
 
-export default function formValidation(name, value, schema) {
+export default function formValidation(name: string, value: string, schema: any) {
+  console.log(schema, name);
   const { validate, minLength, maxLength } = schema[name]
   let error = ""
 

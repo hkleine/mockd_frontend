@@ -1,8 +1,6 @@
-import Dashboard from './Dashboard.view';
-import AlertView from './Alert.view';
-import StatisticView from './Statistic.view';
-import ProfileView from './Profile.view';
-import EditView from './Edit.view';
-import AddView from './Add.view';
-
-export { Dashboard, AlertView, StatisticView, ProfileView, EditView, AddView };
+export * from './Add.view';
+export * from './Alert.view'
+export * from './Dashboard.view'
+export * from './Edit.view'
+export * from './Profile.view'
+export * from './Statistic.view'

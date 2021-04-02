@@ -11,7 +11,7 @@ import { updateDevice, getDevice, getLogs } from '../api';
 import { SocketContext } from '../context/SocketContext';
 import { Device, Log } from "../types";
 
-function EditView({ match }: any) {
+export function EditView({ match }: any) {
   let params = match.params;
   const { getAccessTokenSilently } = useAuth0();
   const [isLoading, setLoading] = useState(true);
@@ -200,5 +200,3 @@ function EditView({ match }: any) {
     : null
   );
 }
-
-export default EditView;
