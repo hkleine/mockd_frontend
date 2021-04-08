@@ -7,6 +7,7 @@ import {createDevice} from '../../api'
 import { SubmitButton } from '..'
 import { SnackbarContext } from "../../context";
 import { Severity } from "../../types";
+import { SecondaryButton } from "../SecondaryButton";
 
 
 // Destructuring props
@@ -48,9 +49,9 @@ const ThirdStep = ({ handleNext, handleBack, handleChange, values }: any) => {
             required
           />
       <div style={{ display: "flex", marginTop: 50, justifyContent: "flex-end" }}>
-        <Button variant="contained" color="default" onClick={handleBack} style={{ marginRight: 10 }}>
-          Back
-        </Button>
+        <SecondaryButton className="mr-4" onClick={handleBack}>
+          back
+        </SecondaryButton>
         <SubmitButton isValid={isValid} onClick={handleSubmit}>submit</SubmitButton>
       </div>
     </Fragment>

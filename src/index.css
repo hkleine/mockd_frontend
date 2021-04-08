@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
   height: 100vh;
   margin: 0;
@@ -14,6 +15,20 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+pre {
+  padding: 1rem;
+  border: 1px solid #fff;
+  border-radius: 4px;
+}
+
+button {
+  outline: none;
+}
+
+button:focus {
+  outline: none;
 }
 
 .sidebar-background {
@@ -107,13 +122,7 @@ code {
   padding: 1rem;
   border: 1px solid #fff;
 }
-
-pre {
-  padding: 1rem;
-  border: 1px solid #fff;
-  border-radius: 4px;
-}
-
 .edit-container {
   width: 800px;
 }
+

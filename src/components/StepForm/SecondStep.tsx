@@ -1,8 +1,8 @@
-import React from "react"
 import Grid from "@material-ui/core/Grid"
-import {TextField, Button, Select, MenuItem, FormControl, InputLabel} from "@material-ui/core"
+import {TextField, Select, MenuItem, FormControl, InputLabel} from "@material-ui/core"
 import { HttpMethods } from '../../types'
 import { SubmitButton } from '..'
+import { SecondaryButton } from "../SecondaryButton"
 
 
 // Destructuring props
@@ -60,9 +60,9 @@ const SecondStep = ({ handleNext, handleBack, handleChange, values: { protocol, 
           />
         </Grid>
         <div style={{ display: "flex", marginTop: 50, justifyContent: "flex-end" }}>
-            <Button variant="contained" color="default" onClick={handleBack} style={{ marginRight: 10 }}>
-              Back
-            </Button>
+            <SecondaryButton className="mr-4" onClick={handleBack}>
+              back
+            </SecondaryButton>
             <SubmitButton isValid={isValid} onClick={handleNext}>next</SubmitButton>
           </div>
         </>
@@ -112,9 +112,9 @@ const SecondStep = ({ handleNext, handleBack, handleChange, values: { protocol, 
               />
             </Grid>
               <div style={{ display: "flex", marginTop: 50, justifyContent: "flex-end" }}>
-                <Button variant="contained" color="default" onClick={handleBack} style={{ marginRight: 10 }}>
-                  Back
-                </Button>
+                <SecondaryButton className="mr-4" onClick={handleBack}>
+                  back
+                </SecondaryButton>
                 <SubmitButton isValid={isValid} onClick={handleNext}>next</SubmitButton>
               </div>
           </> 

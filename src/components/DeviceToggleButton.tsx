@@ -30,17 +30,16 @@ export const DeviceToggleButton = ({device, setDevice}: any) => {
     }
 
     return (
-        <FormControlLabel
-        control={
-          <Switch
-            checked={checked}
-            onChange={handleToggleDevice}
-            name="device toggle"
-            color="primary"
-            className="w-24"
+        <div>
+            <Switch
+                checked={checked}
+                onChange={handleToggleDevice}
+                name="device toggle"
+                color="primary"
+                className="w-20"
             />
-        }
-        label="sending"
-        />
+            <span className="text-gray-600 text-sm">running</span>
+        </div>
+
     );
 };

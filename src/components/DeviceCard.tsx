@@ -79,7 +79,7 @@ export function DeviceCard({deviceIn}: any) {
             }
             <div className="flex flex-row items-center">
                 <DeviceToggleButton device={device} setDevice={setDevice} />
-                <div className="flex flex-row items-center">
+                <div className="flex flex-row items-center pl-4">
                     <IconContext.Provider value={{ style: { fontSize: '15px' } }}>
                         <div className="text-gray-600">
                             <HiOutlineClock />

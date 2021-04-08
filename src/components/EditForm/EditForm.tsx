@@ -1,13 +1,13 @@
 import moment from "moment";
-import { Device, Protocols, Severity } from "../types";
-import { updateDevice } from '../api';
+import { Device, Protocols, Severity } from "../../types";
+import { updateDevice } from '../../api';
 import { useContext, useState } from "react";
-import { SnackbarContext } from "../context";
+import { SnackbarContext } from "../../context";
 import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Divider, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
-import { DeviceToggleButton } from "./DeviceToggleButton";
+import { DeviceToggleButton } from "../DeviceToggleButton";
 import { ProtocolInputs } from "./ProtocolInputs";
 import { IconContext } from "react-icons/lib";
 import { HiOutlineClock } from "react-icons/hi";
@@ -46,7 +46,7 @@ export const EditForm = ({device, setDevice}: any) => {
           <div className="flex flex-row my-8">
             <div className="mr-12 w-3/6">
             <h2 className="text-gray-700 mb-4 text-xl font-medium">Device Settings</h2>
-            <div className="grid grid-cols-1 gap-8">
+            <div className="grid grid-cols-2 gap-8">
               <Controller
                 control={control}
                 name="name"
@@ -61,10 +61,11 @@ export const EditForm = ({device, setDevice}: any) => {
                     inputRef={ref}
                     defaultValue={device.name}
                     label="Name" 
+                    className="col-span-2"
                   />
                 )}
               />
-              <FormControl>
+              <FormControl className="col-span-2">
                 <InputLabel>Protocol</InputLabel>
                 <Select
                   defaultValue={device.protocol}
@@ -114,7 +115,7 @@ export const EditForm = ({device, setDevice}: any) => {
             </div>
 
             <Divider orientation="vertical" flexItem />
-            <ProtocolInputs device={device} protocol={protocol} register={register} />
+            <ProtocolInputs device={device} protocol={protocol} register={register} control={control} />
           </div>
           
 
