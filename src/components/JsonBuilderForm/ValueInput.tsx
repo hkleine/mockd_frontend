@@ -6,10 +6,10 @@ export const ValueInput = ({className, objKey, value, type, updateValue}:any) =>
     const renderSwitch = () => {
         switch(type) {
             case 'string':
-                return <TextField className={`col-span-3 ${className}`} defaultValue={value} onChange={updateValue(objKey, type)} label="Value" variant="outlined" />
+                return <TextField className="w-full" defaultValue={value} onChange={updateValue(objKey, type)} label="Value" variant="outlined" />
             case 'boolean':
                 return (
-                    <FormControl className={`col-span-3 ${className}`} variant="outlined">
+                    <FormControl className="w-full" variant="outlined">
                         <InputLabel shrink >Value</InputLabel>
                         <Select
                             defaultValue={value}
@@ -22,14 +22,25 @@ export const ValueInput = ({className, objKey, value, type, updateValue}:any) =>
                     </FormControl> 
                 )
             case 'number':
-                return <TextField type='number' className={`col-span-3 ${className}`} defaultValue={value} onChange={updateValue(objKey, type)} label="Value" variant="outlined" />
+                return <TextField className="w-full" type='number' defaultValue={value} onChange={updateValue(objKey, type)} label="Value" variant="outlined" />
+            
+            case 'object': 
+                return (
+                    <TextField
+                        className="w-full"
+                        label="Object"
+                        multiline
+                        defaultValue="{}"
+                        variant="outlined"
+                        />
+                )
 
             default:
-                <TextField className={`${className}`} defaultValue={value} onChange={updateValue(objKey, type)} label="Value" variant="outlined" />
+                return <TextField className="w-full" defaultValue={value} onChange={updateValue(objKey, type)} label="Value" variant="outlined" />
         }
     }
 
     return (
-        <div>{renderSwitch()}</div>
+        <div className={`${className}`}>{renderSwitch()}</div>
     );
 }

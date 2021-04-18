@@ -30,7 +30,7 @@ export const KeyValueInput = ({objKey, updateObjKey, deleteProperty, value, upda
                 </Select>
             </FormControl>
             
-            <ValueInput value={value} type={type} objKey={objKey} updateValue={updateValue} />
+            <ValueInput className="col-span-3" value={value} type={type} objKey={objKey} updateValue={updateValue} />
             {/* <TextField className="col-span-3" defaultValue={value} onChange={updateValue(objKey)} label="Value" variant="outlined" /> */}
 
             <button className="pb-2" onClick={deleteProperty(objKey)}>

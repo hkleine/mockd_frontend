@@ -72,12 +72,12 @@ export const JsonBuilderForm = ({device, setDevice}:any) => {
                 <div className="flex flex-row justify-between">
                     <SecondaryButton onClick={addNewKeyValuePairs}>
                         <div className="flex flex-row">
-                        <IconContext.Provider value={{ style: { fontSize: '25px' } }}>
-                            <div className="m-auto">
-                                <HiOutlinePlus />
-                            </div>
-                        </IconContext.Provider>
-                        <span>add</span> 
+                            <IconContext.Provider value={{ style: { fontSize: '25px' } }}>
+                                <div className="m-auto">
+                                    <HiOutlinePlus />
+                                </div>
+                            </IconContext.Provider>
+                            <span>add</span> 
                         </div>
                     </SecondaryButton>
                     <PrimaryButton onClick={saveData}>
@@ -85,7 +85,6 @@ export const JsonBuilderForm = ({device, setDevice}:any) => {
                     </PrimaryButton>
                 </div>
             </div>
-        </div>
-        
+        </div> 
     );
 }
