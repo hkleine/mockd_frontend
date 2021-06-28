@@ -1,4 +1,3 @@
-import React from "react";
 import { MenuHeading } from "../components";
 import {DashboardLayout} from "../layouts"
 

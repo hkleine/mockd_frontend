@@ -1,6 +1,6 @@
 import moment from "moment";
 import { Device, Protocols, Severity } from "../../types";
-import { updateDevice } from '../../api';
+import { updateDevice } from '../../hooks';
 import { useContext, useState } from "react";
 import { SnackbarContext } from "../../context";
 import { useAuth0 } from "@auth0/auth0-react";

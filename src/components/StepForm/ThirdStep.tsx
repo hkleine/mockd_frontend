@@ -1,9 +1,8 @@
-import React, { Fragment, useContext } from "react"
-import Button from "@material-ui/core/Button"
+import { Fragment, useContext } from "react"
 import { TextField } from "@material-ui/core"
 import { useAuth0 } from '@auth0/auth0-react';
 import { omitBy, isEmpty } from 'lodash';
-import {createDevice} from '../../api'
+import {createDevice} from '../../hooks'
 import { SubmitButton } from '..'
 import { SnackbarContext } from "../../context";
 import { Severity } from "../../types";

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { DashboardLayout } from '../layouts';
 import { useAuth0 } from '@auth0/auth0-react';
 import { DeviceLog, JsonBuilderForm, Loading, MenuHeading } from '../components';
-import { getDevice } from '../api';
+import { getDevice } from '../hooks';
 import { Device } from "../types";
 import { Paper, Tab, Tabs } from '@material-ui/core';
 import { EditForm } from '../components';

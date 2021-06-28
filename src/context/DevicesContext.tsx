@@ -1,5 +1,6 @@
-import React, { Dispatch } from 'react'
+import React, { Dispatch, useEffect, useState } from 'react'
 import { Device } from '../types';
+import { useDevices } from "../hooks";
 
 export interface IDevicesContext {
     devices: Device[] | undefined;
@@ -11,9 +12,14 @@ export const DevicesContext = React.createContext<IDevicesContext>({
     setCurrentDevices: () => {}
 });
 
-export const DevicesProvider = ({ value, children }:any) => {
+export const DevicesProvider = ({ children }:any) => {
+    const {isLoading, devicesData} = useDevices();
+    const [devices, setCurrentDevices] = useState<Device[]>(devicesData);
+
+    console.log(devicesData);
+
     return (
-        <DevicesContext.Provider value={value}>
+        <DevicesContext.Provider value={{devices, setCurrentDevices}}>
             {children}
         </DevicesContext.Provider>
     )

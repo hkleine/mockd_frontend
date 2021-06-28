@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import { getLogs } from "../api";
+import { getLogs } from "../hooks";
 import { Log } from "../types";
 
 export const DeviceLog = ({device}:any) => {

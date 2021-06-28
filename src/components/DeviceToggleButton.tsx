@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { toggleDevice } from '../api'
+import { toggleDevice } from '../hooks'
 import { SnackbarContext } from "../context";
 import { Severity } from '../types';
-import { FormControlLabel, Switch } from '@material-ui/core';
+import { Switch } from '@material-ui/core';
 
 
 export const DeviceToggleButton = ({device, setDevice}: any) => {

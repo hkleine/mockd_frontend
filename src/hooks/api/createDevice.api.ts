@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Device } from '../types';
+import { Device } from '../../types';
 
 export async function createDevice(newDevice: Device, accessToken: string) {
     return await axios({

@@ -5,7 +5,7 @@ import { KeyValueInput } from './KeyValueInput'
 import { JsonBuilderViewer } from "./JsonViewer";
 import { SecondaryButton } from "../SecondaryButton";
 import { PrimaryButton } from "../PrimaryButton";
-import { updateDevice } from "../../api";
+import { updateDevice } from "../../hooks";
 import { useAuth0 } from "@auth0/auth0-react";
 import { SnackbarContext } from "../../context";
 import { Severity } from "../../types";

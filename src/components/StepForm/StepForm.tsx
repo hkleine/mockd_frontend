@@ -1,4 +1,3 @@
-import React, { useState } from "react"
 import Stepper from "@material-ui/core/Stepper"
 import Step from "@material-ui/core/Step"
 import StepLabel from "@material-ui/core/StepLabel"
@@ -7,6 +6,7 @@ import SecondStep from "./SecondStep"
 import ThirdStep from "./ThirdStep"
 import formValidation from "./Helper/formValidation"
 import { Redirect } from "react-router-dom";
+import { useState } from "react"
  
 // Step titles
 const labels = ["First Step", "Second Step", "Third Step"]

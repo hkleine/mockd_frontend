@@ -8,7 +8,7 @@ import moment, { Duration } from 'moment';
 import { Device } from "../types";
 import { DevicesContext } from "../context";
 import { List, remove } from "lodash";
-import { deleteDevice } from '../api'
+import { deleteDevice } from '../hooks'
 
 
 export function DeviceCard({deviceIn}: any) {
